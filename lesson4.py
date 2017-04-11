@@ -51,14 +51,16 @@ def f1(x):
 # x = 3
 # z = f1(x)
 
-
+#
 # Assignment
+#
 
 outstanding_balance = int(input('Enter Outstanding Balance: '))
 annual_interest_rate = float(input('Enter Annual Interest Rate: '))
 
-
+#
 # Problem 1
+#
 # Write a program that calculates the credic car d balance after one year
 # Minimum monthly payment = .02 x $5000.0 = $100.0
 # Interest paid = .18/12.0 x $5000.0 = $75.0
@@ -89,6 +91,9 @@ monthlyInterestRate = annual_interest_rate/12
 #
 # Problem 2
 #
+# Write a program that calculates the minimum fixed monthly payment needed in order pay
+# off a credit card balance within 12 months. We will not be dealing with a minimum monthly
+# payment rate.
 
 def calculateMonthlyPayment(balance):
 
@@ -125,6 +130,14 @@ def calculateMonthlyPayment(balance):
 
 # calculateMonthlyPayment(outstanding_balance)
 
+#
+# Problem 3
+#
+# Write a program that uses these bounds and bisection search (for more info check out the
+# Wikipedia page here) to find the smallest monthly payment to the cent (no more multiples of
+# $10) such that we can pay off the debt within a year. Try it out with large inputs, and notice how
+# fast it is. Produce the output in the same format as you did in problem 2.
+
 def calculateMinMonthlyPayment(balance, yearlyInterest):
 
     low = balance/12
@@ -135,7 +148,6 @@ def calculateMinMonthlyPayment(balance, yearlyInterest):
     monthlyInterest = yearlyInterest/12
     deltaBalance = balance
     numMonths = 0
-    # print("high: ", high, "low: ", low)
 
     while abs(deltaBalance) >= epsilon and monthlyPayment <= high and monthlyPayment >= low:
 
@@ -160,5 +172,6 @@ def calculateMinMonthlyPayment(balance, yearlyInterest):
     print("RESULT")
     print("Monthly payment to pay off debt in 1 year:  ", deltaBalance)
     print("Number of months needed: ", monthlyPayment)
+    print("Number of guesses" numGuesses)
 
 calculateMinMonthlyPayment(outstanding_balance,annual_interest_rate)
