@@ -1,3 +1,4 @@
+from decimal import *
 def keySearch(L, k):
     for elem in L:
         if elem[0] == k: return elem[1]
@@ -155,7 +156,7 @@ poly = (-13.39, 0.0, 17.5, 3.0, 1.0)
 # to get to the root.
 #
 # Example:
-# >>> poly = (-13.39, 0.0, 17.5, 3.0, 1.0)    #x^4 + 3x^3 + 17.5x^2 - 13.39
+# >>> poly = (-13.39, 0.0, 17.5, 3.0, 1.0)    #x^4 + 3x^3 + 17.5x^2 - 13.39  derivative = 4x^3 + 9x^2 + 35^x
 # >>> x_0 = 0.1
 # >>> epsilon = .0001
 # >>> print compute_root(poly, x_0, epsilon)
@@ -167,13 +168,37 @@ poly = (-13.39, 0.0, 17.5, 3.0, 1.0)
 # x_0: float
 # epsilon: float > 0
 # returns: tuple (float, int)
-# def evaluate_derivative()
-# def compute_root(poly, x_0, epsilon):
-#     f = evaluate_poly(poly, x_0)
-#     fprime = compute_deriv(poly)
-    # TO DO ...
+
+# (0.0, 35.0, 9.0, 4.0)
+
+def evaluate_derivative(poly, x_0):
+    result = 0
+    for i in range(len(poly)):
+        result += float(poly[i] * Exponent(x_0, i))
+    return result
+
+def compute_root(poly, x_0, epsilon):
+
+    numGuesses = 1
+    y = evaluate_poly(poly, x_0) # evaluates a polynomial given
+    fprimeInput = compute_deriv(poly) # returns a tuple with the derivative
+    yprime = evaluate_derivative(fprimeInput, x_0)
+    x_1 = x_0 - (y / yprime)
+
+    while abs(x_1 - x_0) >= epsilon * abs(x_1):
+        x_0 = x_1
+        numGuesses = numGuesses + 1
+        y = evaluate_poly(poly, x_0) # evaluates a polynomial given
+        fprimeInput = compute_deriv(poly) # returns a tuple with the derivative
+        yprime = evaluate_derivative(fprimeInput, x_0)
+
+        x_1 = x_0 - (y / yprime) # Newton's computation
+    # print("x_1 diff:", Decimal(abs(x_1 - x_0)), ">=", "x_1 * epsi:", Decimal(epsilon * abs(x_1)))
+    return (x_1, numGuesses)
 
 
 # print(Exponent(2, 6))
 # print(evaluate_poly(poly, x))
 # print("derivative: ", compute_deriv(poly))
+poly = (-13.39, 0.0, 17.5, 3.0, 1.0)
+print(compute_root(poly, 0.1, 0.0001))
