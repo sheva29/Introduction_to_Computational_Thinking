@@ -84,3 +84,36 @@
 #         Hanoi(n-1, s, t, f)
 
 #print(Hanoi(5, "f", "t", "s"))
+
+#
+# Problem 1
+#
+# Computes the polynomial function for a given value x. Returns that value.
+# Example:
+# >>> poly = (0.0, 0.0, 5.0, 9.3, 7.0) # f(x) = 7.0x4 + 9.3x3 + 5.0x2
+# >>> x = -13
+# >>> print evaluate_poly(poly, x) # f(-13) = 7.0(-13)4 + 9.3(-13)3 + 5.0(-13)2
+# 180339.9
+# poly: tuple of numbers, length > 0
+# x: number
+# returns: float
+
+# TO DO ...
+
+def Exponent(numerator, exponent):
+    if exponent == 1:
+        return numerator
+    elif exponent == 0:
+        return 1
+    else:
+        return numerator * Exponent(numerator, exponent -1)
+
+def evaluate_poly(poly, x):
+    return   float((poly[2] * Exponent(x,4)) + (poly[1] * Exponent(x,3)) + (poly[0] * Exponent(x,2)))
+
+
+poly = (5.0, 9.3, 7.0)
+x = -13
+
+# print(Exponent(2, 6))
+print(evaluate_poly(poly, x))
