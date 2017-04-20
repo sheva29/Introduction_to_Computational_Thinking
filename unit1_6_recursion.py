@@ -115,5 +115,23 @@ def evaluate_poly(poly, x):
 poly = (5.0, 9.3, 7.0)
 x = -13
 
+#
+# Problem 2
+#
+# Computes and returns the derivative of a polynomial function. If the
+# derivative is 0, returns (0.0,).
+#
+# Example:
+# >>> poly = (-13.39, 0.0, 17.5, 3.0, 1.0)    # x^4 + 3x^3 + 17.5x^2 - 13.39
+# >>> print compute_deriv(poly)        # 4x^3 + 9x^2 + 35^x
+# (0.0, 35.0, 9.0, 4.0)
+#
+# poly: tuple of numbers, length > 0
+# returns: tuple of numbers
+#
+# TO DO ... 
+def compute_deriv(poly):
+    return poly
+
 # print(Exponent(2, 6))
-print(evaluate_poly(poly, x))
+# print(evaluate_poly(poly, x))
