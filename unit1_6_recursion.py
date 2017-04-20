@@ -143,11 +143,9 @@ def compute_deriv(poly):
     index = 1
     return Derive(poly, derivative, index)
 
-
-
 poly = (-13.39, 0.0, 17.5, 3.0, 1.0)
-newPol = poly
+
+
 # print(Exponent(2, 6))
 # print(evaluate_poly(poly, x))
 print("derivative: ", compute_deriv(poly))
-print("poly:", newPol)
