@@ -129,9 +129,25 @@ x = -13
 # poly: tuple of numbers, length > 0
 # returns: tuple of numbers
 #
-# TO DO ... 
-def compute_deriv(poly):
-    return poly
+# TO DO ...
 
+def Derive(poly, derivative, index):
+    if index == len(poly):
+        return derivative
+    else:
+        derivative = derivative + (float( index * poly[index]), )
+        return Derive(poly, derivative, index + 1)
+
+def compute_deriv(poly):
+    derivative = ()
+    index = 1
+    return Derive(poly, derivative, index)
+
+
+
+poly = (-13.39, 0.0, 17.5, 3.0, 1.0)
+newPol = poly
 # print(Exponent(2, 6))
 # print(evaluate_poly(poly, x))
+print("derivative: ", compute_deriv(poly))
+print("poly:", newPol)
