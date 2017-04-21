@@ -190,7 +190,7 @@ def compute_root(poly, x_0, epsilon):
         numGuesses = numGuesses + 1
         y = evaluate_poly(poly, x_0) # evaluates a polynomial given
         fprimeInput = compute_deriv(poly) # returns a tuple with the derivative
-        yprime = evaluate_derivative(fprimeInput, x_0)
+        yprime = evaluate_derivative(fprimeInput, x_0) # returns derivative value from the tuple
 
         x_1 = x_0 - (y / yprime) # Newton's computation
     # print("x_1 diff:", Decimal(abs(x_1 - x_0)), ">=", "x_1 * epsi:", Decimal(epsilon * abs(x_1)))
