@@ -1,4 +1,5 @@
 from decimal import *
+import random
 def keySearch(L, k):
     for elem in L:
         if elem[0] == k: return elem[1]
@@ -196,9 +197,48 @@ def compute_root(poly, x_0, epsilon):
     # print("x_1 diff:", Decimal(abs(x_1 - x_0)), ">=", "x_1 * epsi:", Decimal(epsilon * abs(x_1)))
     return (x_1, numGuesses)
 
-
+poly = (-13.39, 0.0, 17.5, 3.0, 1.0)
 # print(Exponent(2, 6))
 # print(evaluate_poly(poly, x))
 # print("derivative: ", compute_deriv(poly))
-poly = (-13.39, 0.0, 17.5, 3.0, 1.0)
-print(compute_root(poly, 0.1, 0.0001))
+# print(compute_root(poly, 0.1, 0.0001))
+
+
+def load_words():
+    inFile = open("words.txt", "r")
+    line = inFile.readline()
+    wordList = str.split(line)
+    return wordList
+
+def choose_word(wordList):
+    return   random.choice(wordList)
+
+def eval_letter(letter, _availableLetters):
+    if len(letter) > 1 or len(letter) <= 0:
+        print("You need to provide only 1 letter")
+
+    if _availableLetters.containing(letter):
+        _availableLetters.remove(letter)
+
+    return letter
+
+def place_holder_word(len):
+    placeHolder = ""
+    for i in range(len):
+        placeHolder = placeHolder + "_"
+    return placeHolder
+
+def main():
+    wordList = load_words()
+    wordToGuess = choose_word(wordList)
+    placeHolder = place_holder_word(len(wordToGuess))
+    availableLetters = "abcdefghijklmnopqrstuvwxyz"
+    numGuesses = 0
+    while numGuesses < 8:
+        print("Welcome to the game, Hangman!")
+        print("I'm thinking of a word that is", len(wordToGuess), "letters long.")
+        print("Available letter:", availableLetters)
+        letterToGuess = input("Please guess a letter: ")
+        eval_letter(letterToGuess)
+
+#print(choose_word(wordList))
