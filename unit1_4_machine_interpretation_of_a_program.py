@@ -1,19 +1,19 @@
 # Lesson 4
 
-# x =0.5
-# epsilon = 0.01
-# numGuesses = 0
-# low = 0.0
-# high = max(x, 1)
-# ans = (high + low)/2.0
-# while abs(ans**2 - x) >= epsilon and ans <= x:
-#     print('ans =', ans, 'low =', low, 'high= ', high)
-#     numGuesses += 1
-#     if ans**2 < x:
-#         low = ans
-#     else:
-#         high = ans
-#     ans = (high + low)/ 2.0
+x =0.5
+epsilon = 0.01
+numGuesses = 0
+low = 0.0
+high = max(x, 1)
+ans = (high + low)/2.0
+while abs(ans**2 - x) >= epsilon and ans <= x:
+    print('ans =', ans, 'low =', low, 'high= ', high)
+    numGuesses += 1
+    if ans**2 < x:
+        low = ans
+    else:
+        high = ans
+    ans = (high + low)/ 2.0
 # print('numguesses =', numGuesses)
 # print(ans, "is close to square root of", x)
 
@@ -32,8 +32,8 @@ def f(x):
     print("x =" ,x )
     return x
 
-# x = 3
-# z = f(x)
+x = 3
+z = f(x)
 # print("z =", z)
 # print("x =", x)
 
@@ -61,7 +61,7 @@ annual_interest_rate = float(input('Enter Annual Interest Rate: '))
 #
 # Problem 1
 #
-# Write a program that calculates the credic car d balance after one year
+# Write a program that calculates the credit card balance after one year
 # Minimum monthly payment = .02 x $5000.0 = $100.0
 # Interest paid = .18/12.0 x $5000.0 = $75.0
 # Principal paid = $100.0 – $75.0 = $25
