@@ -225,7 +225,7 @@ def load_words():
 
 # 2. We choose a word randomly
 def choose_word(wordList):
-    return   random.choice(wordList)
+    return random.choice(wordList)
 
 # 3. We check if user input is valid or not, we won't take more than one character
 def eval_input(_input):
@@ -287,8 +287,10 @@ def main():
     if numGuesses is 0 and '_' in placeHolder:
         print("you lost, the word was:", printWord(wordToGuess, False))
 
-main()
+
 # print(Exponent(2, 6))
 # print(evaluate_poly(poly, x))
 # print("derivative: ", compute_deriv(poly))
 # print(compute_root(poly, 0.1, 0.0001))
+
+main()
