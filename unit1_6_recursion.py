@@ -256,7 +256,7 @@ def eval_guess(letter, placeHolder, wordToGuess, numGuesses, availableLetters):
     if letter not in availableLetters:
         availableLetters = availableLetters.remove(letter)
 
-def main():
+def HangMan():
     wordList = load_words()
     wordToGuess = list(choose_word(wordList))
     placeHolder = place_holder_word(len(wordToGuess))
@@ -293,4 +293,4 @@ def main():
 # print("derivative: ", compute_deriv(poly))
 # print(compute_root(poly, 0.1, 0.0001))
 
-main()
+HangMan()
