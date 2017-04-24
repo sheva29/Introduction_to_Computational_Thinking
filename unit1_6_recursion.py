@@ -204,6 +204,11 @@ poly = (-13.39, 0.0, 17.5, 3.0, 1.0)
 # print(compute_root(poly, 0.1, 0.0001))
 
 
+#
+# Problem 4
+#
+# Hangman
+
 def load_words():
     inFile = open("words.txt", "r")
     line = inFile.readline()
@@ -213,32 +218,53 @@ def load_words():
 def choose_word(wordList):
     return   random.choice(wordList)
 
-def eval_letter(letter, _availableLetters):
+def eval_input(letter, _availableLetters):
     if len(letter) > 1 or len(letter) <= 0:
         print("You need to provide only 1 letter")
 
-    if _availableLetters.containing(letter):
-        _availableLetters.remove(letter)
+    if letter in _availableLetters:
+        _availableLetters = _availableLetters.replace(letter, "")
 
     return letter
 
 def place_holder_word(len):
-    placeHolder = ""
+    placeHolder = []
     for i in range(len):
-        placeHolder = placeHolder + "_"
+        placeHolder.append("_")
     return placeHolder
+
+def eval_guess(letter, placeHolder, wordToGuess, numGuesses):
+    if letter in wordToGuess:
+        index = wordToGuess.index(letter)
+        placeHolder[index] = letter
+        print("placeHolder:",placeHolder)
+        print("Good guess: ", printWord(placeHolder))
+        # numGuesses = numGuesses - 1
+    else:
+        print("Oops! That letter is not in my word: ", printWord(placeHolder))
+
+def printWord(word):
+    wordToPrint = "".join(word)
+    print(wordToPrint)
 
 def main():
     wordList = load_words()
-    wordToGuess = choose_word(wordList)
+    wordToGuess = list(choose_word(wordList))
     placeHolder = place_holder_word(len(wordToGuess))
     availableLetters = "abcdefghijklmnopqrstuvwxyz"
-    numGuesses = 0
-    while numGuesses < 8:
-        print("Welcome to the game, Hangman!")
-        print("I'm thinking of a word that is", len(wordToGuess), "letters long.")
+    numGuesses = 9
+    print(wordToGuess)
+    print("Welcome to the game, Hangman!")
+    print("I'm thinking of a word that is", len(wordToGuess), "letters long.")
+    while 0 < numGuesses:
+        print("You have", numGuesses, "left.")
         print("Available letter:", availableLetters)
-        letterToGuess = input("Please guess a letter: ")
-        eval_letter(letterToGuess)
+        letterToGuess = str(input("Please guess a letter: "))
+        eval_input(letterToGuess, availableLetters)
+        eval_guess(letterToGuess, placeHolder, wordToGuess, numGuesses)
+        if numGuesses > 0 and '-' not in placeHolder:
+            print('Congratulations, you won!')
+        numGuesses = numGuesses - 1
 
 #print(choose_word(wordList))
+main()
