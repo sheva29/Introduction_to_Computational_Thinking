@@ -113,7 +113,7 @@ def test_update_hand():
     expected_hand1 = {}
     expected_hand2 = {'h': 0, 'e': 0, 'l': 0, 'o': 0}
     if hand2 != expected_hand1 and hand2 != expected_hand2:
-        print(x"FAILURE: test_update_hand('"+ word +"', " + str(hand) + ")")
+        print("FAILURE: test_update_hand('"+ word +"', " + str(hand) + ")")
         print("\tReturned: ", hand2, "-- but expected:", expected_hand1, "or", expected_hand2)
 
         return # exit function
