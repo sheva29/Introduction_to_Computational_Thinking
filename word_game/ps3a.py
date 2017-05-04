@@ -89,8 +89,6 @@ def get_word_score(word, n):
     # print("result:", result)
     return result
 
-
-
 #
 # Make sure you understand how this function works and what it does!
 #
@@ -106,11 +104,12 @@ def display_hand(hand):
 
     hand: dictionary (string -> int)
     """
+    handLetters = ""
     for letter in hand.keys():
         for j in range(hand[letter]):
-             print(letter,)            # print all on the same line
-    print()                               # print an empty line
-
+            handLetters = handLetters + letter + " "#  print(letter,)            # print all on the same line
+    # print()                               # print an empty line
+    return handLetters
 #
 # Make sure you understand how this function works and what it does!
 #
@@ -127,7 +126,7 @@ def deal_hand(n):
     returns: dictionary (string -> int)
     """
     hand={}
-    num_vowels = n / 3
+    num_vowels = round(n / 3)
 
     for i in range(num_vowels):
         x = VOWELS[random.randrange(0,len(VOWELS))]
@@ -159,6 +158,11 @@ def update_hand(hand, word):
     returns: dictionary (string -> int)
     """
     # TO DO ...
+    for c in word:
+        hand[c] = hand.get(c, 0) - 1
+        if hand[c] is 0:
+            del hand[c]
+    return hand
 
 #
 # Problem #3: Test word validity
@@ -174,6 +178,19 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     """
     # TO DO...
+    checkHand = hand.copy()
+    for c in word:
+        if checkHand.get(c) is None:
+            return False
+        else:
+            checkHand[c] = checkHand[c] - 1
+            if checkHand[c] < 0:
+                return False
+
+    if word in word_list:
+        return True
+    else:
+        return False
 
 def calculate_handlen(hand):
     handlen = 0
@@ -184,7 +201,7 @@ def calculate_handlen(hand):
 #
 # Problem #4: Playing a hand
 #
-def play_hand(hand, word_list):
+def play_hand(word_list, hand):
 
     """
     Allows the user to play the given hand, as follows:
@@ -213,6 +230,30 @@ def play_hand(hand, word_list):
 
     """
     # TO DO ...
+    # if hand is None:
+    #     hand = deal_hand(HAND_SIZE)
+
+
+
+    userWord = ""
+    score = 0
+    while userWord is not ".":
+
+        print("Current hand: ", display_hand(hand))
+        userWord = input("Enter word, or a \".\" to indicate that you are finished: ")
+
+        if userWord is ".":
+            print("Total score: ", score )
+            break
+
+        if is_valid_word(userWord, hand, word_list) is False:
+            print("Invalid word, please try again")
+        else:
+            tempScore = get_word_score(userWord, len(userWord))
+            score = score + tempScore
+            update_hand(hand, userWord)
+            print("\"" + userWord + "\"" + " earned " + str(tempScore) + " points. Total: " + str(score) + " points")
+
 
 #
 # Problem #5: Playing a game
@@ -240,4 +281,6 @@ def play_game(word_list):
 #
 if __name__ == '__main__':
     word_list = load_words()
+    hand = deal_hand(HAND_SIZE)
+    play_hand(word_list, hand)
     play_game(word_list)
