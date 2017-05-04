@@ -248,6 +248,7 @@ def play_hand(word_list, hand):
 
         if is_valid_word(userWord, hand, word_list) is False:
             print("Invalid word, please try again")
+
         else:
             tempScore = get_word_score(userWord, len(userWord))
             score = score + tempScore
@@ -275,12 +276,28 @@ def play_game(word_list):
     * If the user inputs anything else, ask them again.
     """
     # TO DO...
-
+    userWord = ""
+    hand = {}
+    previousHand = {}
+    while userWord is not "e":
+        userWord = input("Welcome to word game, if you want to play a random hand type \"n\", if you want to play the last hand again type \"r\". If you want to exit just type \"e\": ")
+        if userWord is "n":
+            hand = deal_hand(HAND_SIZE)
+            previousHand = hand.copy()
+            play_hand(word_list, hand)
+        elif userWord is "r":
+            if bool(hand) is False:
+                hand = deal_hand(HAND_SIZE)
+                previousHand = hand.copy()
+                play_hand(word_list, hand)
+            tempHand = previousHand.copy()
+            play_hand(word_list, tempHand)
+    exit()
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     word_list = load_words()
-    hand = deal_hand(HAND_SIZE)
-    play_hand(word_list, hand)
+    #hand = deal_hand(HAND_SIZE)
+    #play_hand(word_list, hand)
     play_game(word_list)
