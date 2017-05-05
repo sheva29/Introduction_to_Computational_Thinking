@@ -17,6 +17,22 @@ def comp_choose_word(hand, word_list):
     word_list: list (string)
     """
     # TO DO...
+    # 1. Use get_perms to get a list [] of possible words
+    # 2. From that list, calculate which hand gives the highest score and store in a dictionary with the highest value
+    # 3. As we get scores, we track of the highest and the word itself
+    # 4. At the end, return score
+    listOfWords = get_perms(hand, len(hand))
+    word = ""
+    score = 0
+    for i in range(listOfWords):
+        tempScore = get_word_score(listOfWords[i], len(listOfWords[i]))
+        if score < tempScore):
+            score = tempScore
+            word = listOfWords[i]
+
+    return word
+
+
 
 #
 # Problem #6B: Computer plays a hand
@@ -29,8 +45,8 @@ def comp_play_hand(hand, word_list):
 
      * The computer chooses a word using comp_choose_words(hand, word_dict).
 
-     * After every valid word: the score for that word is displayed, 
-       the remaining letters in the hand are displayed, and the computer 
+     * After every valid word: the score for that word is displayed,
+       the remaining letters in the hand are displayed, and the computer
        chooses another word.
 
      * The sum of the word scores is displayed when the hand finishes.
@@ -40,8 +56,31 @@ def comp_play_hand(hand, word_list):
      hand: dictionary (string -> int)
      word_list: list (string)
     """
-    # TO DO ...    
-    
+    # TO DO ...
+
+    compWord = ""
+    score = 0
+
+    while compWord != None:
+
+        print("Current hand: ", display_hand(hand))
+        input("Enter word, or a \".\" to indicate that you are finished: ")
+        comWord = comp_choose_word(hand, word_list)
+
+        if compWord == None:
+            print("Total score: ", score)
+            break
+
+        if is_valid_word(comp, hand, word_list) == False:
+            print("INvalid word, please try again")
+
+        else:
+            tempScore = get_word_score(compWord, len(compWord))
+            score = score + tempScore
+            update_hand(hand, compWord)
+            print("\"" + compWord + "\"" + " earnd " + str(tempScore) + " points. Total: " + str(score) + " points")
+
+
 #
 # Problem #6C: Playing a game
 #
@@ -65,12 +104,14 @@ def play_game(word_list):
     word_list: list (string)
     """
     # TO DO...
-        
+    comptWord = ""
+    hand = {}
+    previoushand = {}
+
+    while compWord != "e"
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
-
-    
