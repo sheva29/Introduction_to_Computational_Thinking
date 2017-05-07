@@ -1,6 +1,7 @@
 from ps3a import *
 import time
 from perm import *
+from random import *
 
 
 #
@@ -21,14 +22,16 @@ def comp_choose_word(hand, word_list):
     # 2. From that list, calculate which hand gives the highest score and store in a dictionary with the highest value
     # 3. As we get scores, we track of the highest and the word itself
     # 4. At the end, return score
-    listOfWords = get_perms(hand, len(hand))
+    listOfWords = get_perms(hand, randint(0,len(hand)))
+    # print(listOfWords)
     word = ""
     score = 0
-    for i in range(listOfWords):
-        tempScore = get_word_score(listOfWords[i], len(listOfWords[i]))
-        if score < tempScore):
-            score = tempScore
-            word = listOfWords[i]
+    for i in range(len(listOfWords)):
+        if listOfWords[i] in word_list:
+            tempScore = get_word_score(listOfWords[i], len(listOfWords[i]))
+            if score < tempScore:
+                score = tempScore
+                word = listOfWords[i]
 
     return word
 
@@ -37,7 +40,7 @@ def comp_choose_word(hand, word_list):
 #
 # Problem #6B: Computer plays a hand
 #
-def comp_play_hand(hand, word_list):
+def comp_play_hand(word_list, hand):
     """
      Allows the computer to play the given hand, as follows:
 
@@ -62,17 +65,16 @@ def comp_play_hand(hand, word_list):
     score = 0
 
     while compWord != None:
-
         print("Current hand: ", display_hand(hand))
         input("Enter word, or a \".\" to indicate that you are finished: ")
         comWord = comp_choose_word(hand, word_list)
-
+        # print(compWord)
         if compWord == None:
             print("Total score: ", score)
             break
 
-        if is_valid_word(comp, hand, word_list) == False:
-            print("INvalid word, please try again")
+        if is_valid_word(compWord, hand, word_list) == False:
+            print("Invalid word, please try again")
 
         else:
             tempScore = get_word_score(compWord, len(compWord))
@@ -104,12 +106,36 @@ def play_game(word_list):
     word_list: list (string)
     """
     # TO DO...
-    comptWord = ""
+    firstPrompt = ""
     hand = {}
-    previoushand = {}
+    previousHand = {}
 
-    while compWord != "e"
-#
+    while firstPrompt != "e":
+        firstPrompt = input("Welcome to word game, if you want to play a random hand type \"n\", if you want to play the last hand again type \"r\". If you want to exit just type \"e\": ")
+        if firstPrompt is "n":
+            hand = deal_hand(HAND_SIZE)
+            previousHand = hand.copy()
+            secondPrompt = input("If you want to play, type \"u\", if you want the computer to play type \"c\" ")
+
+            if secondPrompt == "u":
+                play_hand(word_list, hand)
+            elif secondPrompt == "c":
+                comp_play_hand(word_list, hand)
+
+        elif firstPrompt is "r":
+            if bool(hand) is False:
+                hand = deal_hand(HAND_SIZE)
+                previousHand = hand.copy()
+
+            secondPrompt = input("If you want to play, type \"u\", if you want the computer to play type \"c\" ")
+
+            tempHand = previousHand.copy()
+            if secondPrompt == "u":
+                play_hand(word_list, tempHand)
+            elif secondPrompt == "c":
+                comp_play_hand(word_list, tempHand)
+
+
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':

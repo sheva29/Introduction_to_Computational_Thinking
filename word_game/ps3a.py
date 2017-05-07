@@ -105,6 +105,7 @@ def display_hand(hand):
     hand: dictionary (string -> int)
     """
     handLetters = ""
+    print(hand)
     for letter in hand.keys():
         for j in range(hand[letter]):
             handLetters = handLetters + letter + " "#  print(letter,)            # print all on the same line
@@ -290,6 +291,7 @@ def play_game(word_list):
                 hand = deal_hand(HAND_SIZE)
                 previousHand = hand.copy()
                 play_hand(word_list, hand)
+
             tempHand = previousHand.copy()
             play_hand(word_list, tempHand)
     exit()
