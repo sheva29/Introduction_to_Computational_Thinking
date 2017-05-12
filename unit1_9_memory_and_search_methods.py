@@ -64,17 +64,17 @@ def sort(L, lt = lambda x,y: x < y):
         print('About to merge', left, 'and', right)
         return merge(left, right, lt)
 
-##L = [35, 4, 5, 29, 17, 58, 0]
-##newL = sort(L)
-##print('Sorted list =', newL)
-##L = [1.0, 2.25, 24.5, 12.0, 2.0, 23.0, 19.125, 1.0]
-##newL = sort(L, float.__lt__)
-##print('Sorted list =', newL)
+# L = [35, 4, 5, 29, 17, 58, 0]
+# newL = sort(L)
+# print('Sorted list =', newL)
+# L = [1.0, 2.25, 24.5, 12.0, 2.0, 23.0, 19.125, 1.0]
+# newL = sort(L, float.__lt__)
+# print('Sorted list =', newL)
 
 def lastNameFirstName(name1, name2):
     import string
-    name1 = string.split(name1, ' ')
-    name2 = string.split(name2, ' ')
+    name1 = str.split(name1, ' ')
+    name2 = str.split(name2, ' ')
     if name1[1] != name2[1]:
         return name1[1] < name2[1]
     else:
@@ -82,16 +82,16 @@ def lastNameFirstName(name1, name2):
 
 def firstNameLastName(name1, name2):
     import string
-    name1 = string.split(name1, ' ')
-    name2 = string.split(name2, ' ')
+    name1 = str.split(name1, ' ')
+    name2 = str.split(name2, ' ')
     if name1[0] != name2[0]:
         return name1[0] < name2[0]
     else:
         return name1[1] < name2[1]
 
-##L = ['John Guttag', 'Tom Brady', 'Chancellor Grimson', 'Gisele Brady',
-##     'Big Julie']
-##newL = sort(L, lastNameFirstName)
-##print('Sorted list =', newL)
-##newL = sort(L, firstNameLastName)
-##print('Sorted list =', newL)
+L = ['John Guttag', 'Tom Brady', 'Chancellor Grimson', 'Gisele Brady',
+    'Big Julie']
+newL = sort(L, lastNameFirstName)
+print('Sorted list =', newL)
+newL = sort(L, firstNameLastName)
+print('Sorted list =', newL)
