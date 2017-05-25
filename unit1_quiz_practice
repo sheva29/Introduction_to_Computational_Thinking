@@ -1,0 +1,63 @@
+def addVectors(v1, v2):
+    len1 = len(v1)
+    len2 = len(v2)
+    it1 = 0
+    it2 = 0
+    i = 0
+    result = [0] * max(len1, len2)
+    while i < len(result):
+        if it1 < len1:
+            result[i] += v1[it1]
+            it1 += 1
+        if it2 < len2:
+            result[i] += v2[it2]
+            it2 += 1
+        i += 1
+
+    return result
+
+# L = addVectors([4,5], [1,2,3])
+# print(L)
+
+def getLines():
+    inputs = []
+    while True:
+        line = input('Enter a positive integer, -1 to quit: ')
+        if line == "-1":
+            return inputs
+            break
+        inputs.append(line)
+total = 0
+# for e in getLines():
+#     total += int(e)
+# print(str(total))
+
+def f(L):
+    result = []
+    for e in L:
+        if type(e) != list:
+            result.append(e)
+        else:
+            return f(e)
+    return result
+
+result = f([1, [[2, 'a'], ['a','b']], (3, 4)])
+for e in result:
+    print(e)
+#print( )
+''' 6)
+    f(s) => f('abbc')
+    d = {'a': 1, 'b': 2, 'c':1}
+    y = index 1
+
+    f('bbcaa')
+    d = {'b': 2, 'a': 1, 'c': 2}
+    y = index 0
+'''
+
+''' 7.1) True
+    7.1.2) True
+
+    7.2) [2, 'a']
+
+'''
