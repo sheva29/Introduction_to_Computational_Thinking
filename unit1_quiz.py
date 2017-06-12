@@ -82,4 +82,6 @@ print(addUp(d1))
 d2 = f('bbcaa', d2)
 print(addUp(d2))
 print(f('', {}))
-print(result)
+# print(result)
+
+print("6)")
