@@ -174,8 +174,8 @@ def apply_coder(text, coder):
         i += 1
     return ''.join(encodedString)
 
-print(apply_coder("Hello, world!", build_coder(4)))
-print(apply_coder("Lipps,D svph!", build_coder(23)))
+#print(apply_coder(2, build_coder(4)))
+#print(apply_coder("Lipps,D svph!", build_coder(23)))
 
 def apply_shift(text, shift):
     """
@@ -194,7 +194,11 @@ def apply_shift(text, shift):
     >>> apply_shift('This is a test.', 8)
     'Apq hq hiham a.'
     """
-    ### TODO.
+
+    assert type(text) is str, 'text is not a string'
+    assert shift >= 0 and shift < 27, 'shift %s is not between 0 and 27' % shift
+    return apply_coder(text,build_coder(shift))
+# print(apply_shift('This is a test.', 8))
 
 #
 # Problem 2: Codebreaking.
@@ -215,7 +219,37 @@ def find_best_shift(wordlist, text):
     >>> apply_coder(s, build_decoder(8)) returns
     'Hello, world!'
     """
-    ### TODO
+    word = ""
+    tempWordList = []
+    shift = 0
+    for i in range(27):
+
+        word = apply_shift(text, i)
+        j = 0
+        element = ''
+
+        while j < len(word):
+
+            if word[j].isalpha():
+                element += word[j]
+            else:
+                tempWordList.append(element)
+                element = ""
+                tempWordList.append(word[j])
+            j += 1
+
+        for guess in tempWordList:
+
+            if guess.isalpha():
+                if guess.lower() in wordlist:
+                    print(guess)
+                    return i
+
+        print(tempWordList)
+        tempWordList = []
+
+# s = apply_coder('Hello, world!', build_coder(8))
+# print(find_best_shift(wordlist,s))
 
 #
 # Problem 3: Multi-level encryption.
