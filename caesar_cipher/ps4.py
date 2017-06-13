@@ -4,6 +4,7 @@
 #
 import string
 import random
+import numbers
 
 WORDLIST_FILENAME = "words.txt"
 
@@ -122,7 +123,7 @@ def build_coder(shift):
 
     assert shift >= 0 and shift < 27, 'shift %s is not between 0 and 27' % shift
     #numbers.Integral used in case of long integers
-    assert isinstance(shift, numbers.Integral), 'shift is not an integer']
+    assert isinstance(shift, numbers.Integral), 'shift is not an integer'
 
     result = {}
     upper = list(string.ascii_uppercase)
@@ -136,7 +137,7 @@ def build_coder(shift):
 
     return result
 
-print(build_coder(3))
+#print(build_coder(3))
 
 def apply_coder(text, coder):
     """
@@ -152,8 +153,29 @@ def apply_coder(text, coder):
     >>> apply_coder("Khoor,czruog!", build_decoder(3))
     'Hello, world!'
     """
-    ### TODO.
+    # Pseudo Code
+    # init empty list
+    # start looping through 'text'
+    # check if current char is a letter .isalpha() or space.
+    # if is alpha or space, append value to temp string or list
+    # if not space or alpha, don't pass element from encoder
+    # return encoded string
 
+    assert type(text) is str, 'text is not a string'
+
+    encodedString = []
+    coderRef = coder
+    i = 0
+    while i < len(text):
+        if text[i].isalpha() or text[i] == ' ':
+            encodedString.append(coderRef[text[i]])
+        else:
+            encodedString.append(text[i])
+        i += 1
+    return ''.join(encodedString)
+
+print(apply_coder("Hello, world!", build_coder(4)))
+print(apply_coder("Lipps,D svph!", build_coder(23)))
 
 def apply_shift(text, shift):
     """
